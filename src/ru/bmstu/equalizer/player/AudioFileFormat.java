@@ -1,20 +1,16 @@
-/*
- * Copyright (C) Natalia Selyuto 2016 
- * Bauman Moscow State Technical University
- * IU3 
- */
+
 package ru.bmstu.equalizer.player;
 
 /**
  *
- * @author Natalia Selyuto 
+ * RED
  */
 public class AudioFileFormat {
 	private final boolean bigEndian;
 	private final boolean signed;
-	int bits;
-	int channels;
-	double sampleRate;
+	private int bits;
+	private int channels;
+	private double sampleRate;
 	
 	public AudioFileFormat() {
 		this.bigEndian = false;

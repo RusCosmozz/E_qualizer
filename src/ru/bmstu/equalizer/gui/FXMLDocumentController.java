@@ -1,8 +1,4 @@
-/*
- * Copyright (C) Natalia Selyuto 2016 
- * Bauman Moscow State Technical University
- * IU3 
- */
+
 package ru.bmstu.equalizer.gui;
 
 
@@ -29,16 +25,16 @@ import javax.sound.sampled.*;
 
 /**
  *
- * @author Natalia Selyuto
+ * RED
  */
 public class FXMLDocumentController implements Initializable {
      
    
     @FXML 
-    private Slider Slider0, Slider1, Slider2, Slider3, Slider4, Slider5,
+    private Slider Slider0, Slider1, Slider2, Slider3, Slider4, Slider5,Slider6,Slider7,
                     soundSlider, distortionSlider;
     @FXML 
-    private Label Label0, Label1, Label2, Label3, Label4, Label5;
+    private Label Label0, Label1, Label2, Label3, Label4, Label5,Label6,Label7;
     @FXML
     private LineChart chart1;
     @FXML
@@ -49,6 +45,9 @@ public class FXMLDocumentController implements Initializable {
     private Thread playThread, plotThread;
     @FXML
     CheckBox chorusBox, distBox;
+
+    @FXML
+    private TextArea fileName;
   
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -69,20 +68,20 @@ public class FXMLDocumentController implements Initializable {
         File selectedFile = fileChooser.showOpenDialog(new Stage());
         
         if(selectedFile == null) return;
-        
+        fileName.setText(selectedFile.getPath());
         this.audioPlayer = new AudioPlayer(selectedFile);  
-        playThread = new Thread(()->{
-        	this.audioPlayer.play();
-        });
-        playThread.start();
-        
-        System.out.println("PLAY");  
+
+        System.out.println("Opened");
     }
     
     @FXML
     private void play() {
-        if (this.audioPlayer != null)
-            this.audioPlayer.setPause(false);
+        if (this.audioPlayer != null){
+            playThread = new Thread(()->{
+                this.audioPlayer.play();
+            });
+            playThread.start();
+        }
     }
     
     @FXML
@@ -90,9 +89,21 @@ public class FXMLDocumentController implements Initializable {
         if (this.audioPlayer != null)
             this.audioPlayer.setPause(true);
     }
+
+    @FXML
+    private void continueClick()  {
+        if (this.audioPlayer != null)
+            this.audioPlayer.setPause(false);
+    }
+
+    @FXML
+    private void stop(){
+        if (this.audioPlayer != null)
+            playThread.interrupt();
+    }
     
     @FXML
-    private void stop() {
+    private void reset() {
         if (this.audioPlayer == null) return;
         Slider0.setValue(1.0);
         Slider1.setValue(1.0);
@@ -100,7 +111,8 @@ public class FXMLDocumentController implements Initializable {
         Slider3.setValue(1.0);
         Slider4.setValue(1.0);
         Slider5.setValue(1.0);
-        
+        Slider6.setValue(1.0);
+        Slider7.setValue(1.0);
         soundSlider.setValue(0.65);
         this.distortionSlider.setValue(1.0);
     }
@@ -137,38 +149,50 @@ public class FXMLDocumentController implements Initializable {
     private void listenSliders(){
         Slider0.valueProperty().addListener((observable, oldValue, newValue) -> {
             String str = String.format("%.3f",(newValue.doubleValue()));
-            Label0.setText(str);
+           // Label0.setText(str);
             audioPlayer.getEqualizer().getFilter((short)0).setGain((float)newValue.doubleValue());
         });
         
         Slider1.valueProperty().addListener((observable, oldValue, newValue) -> {
             String str = String.format("%.3f",(newValue.doubleValue()));
-            Label1.setText(str);
+           // Label1.setText(str);
             audioPlayer.getEqualizer().getFilter((short)1).setGain((float)newValue.doubleValue());
         });
         
         Slider2.valueProperty().addListener((observable, oldValue, newValue) -> {
             String str = String.format("%.3f",(newValue.doubleValue()));
-            Label2.setText(str);
+          //  Label2.setText(str);
            audioPlayer.getEqualizer().getFilter((short)2).setGain((float)newValue.doubleValue());
         });
         
         Slider3.valueProperty().addListener((observable, oldValue, newValue) -> {
             String str = String.format("%.3f",(newValue.doubleValue()));
-            Label3.setText(str);
+            //Label3.setText(str);
             audioPlayer.getEqualizer().getFilter((short)3).setGain((float)newValue.doubleValue());
         });
         
         Slider4.valueProperty().addListener((observable, oldValue, newValue) -> {
             String str = String.format("%.3f",(newValue.doubleValue()));
-            Label4.setText(str);
+           // Label4.setText(str);
             audioPlayer.getEqualizer().getFilter((short)4).setGain((float)newValue.doubleValue());
         });
         
         Slider5.valueProperty().addListener((observable, oldValue, newValue) -> {
             String str = String.format("%.3f",(newValue.doubleValue()));
-            Label5.setText(str);
+           // Label5.setText(str);
             audioPlayer.getEqualizer().getFilter((short)5).setGain((float)newValue.doubleValue());
+        });
+
+        Slider6.valueProperty().addListener((observable, oldValue, newValue) -> {
+            String str = String.format("%.3f",(newValue.doubleValue()));
+            //Label6.setText(str);
+            audioPlayer.getEqualizer().getFilter((short)6).setGain((float)newValue.doubleValue());
+        });
+
+        Slider7.valueProperty().addListener((observable, oldValue, newValue) -> {
+            String str = String.format("%.3f",(newValue.doubleValue()));
+            //Label7.setText(str);
+            audioPlayer.getEqualizer().getFilter((short)7).setGain((float)newValue.doubleValue());
         });
         
         distortionSlider.valueProperty().addListener((ObservableValue<? extends Number> observable, Number oldValue, Number newValue) -> {
@@ -234,17 +258,17 @@ public class FXMLDocumentController implements Initializable {
     private boolean graphFlag = false;
     @FXML
     private void clickPlot(){
-        if (this.graphFlag == false){
+        if (!this.graphFlag){
             this.graphFlag = true;
         }
         else this.graphFlag = false;
         //System.out.println("PLOT");
         this.plotThread = new Thread(()->{
             while(this.graphFlag){
-                if(this.graphFlag == false)
+                if(!this.graphFlag)
                     for(;;){
                         try{
-                            if(this.graphFlag == true) break;
+                            if(this.graphFlag) break;
                             this.plotThread.sleep(50);
                         }
                         catch(Exception e){

@@ -1,8 +1,4 @@
-/*
- * Copyright (C) Natalia Selyuto 2016 
- * Bauman Moscow State Technical University
- * IU3 
- */
+
 package ru.bmstu.equalizer.player;
 
 import static java.lang.Math.*;
@@ -10,7 +6,7 @@ import static java.lang.Math.*;
 
 /**
  *
- * @author Natalia Selyuto 
+ * RED
  */
 public class FFT {
     // AVal - массив анализируемых данных, Nvl - длина массива должна быть кратна степени 2.

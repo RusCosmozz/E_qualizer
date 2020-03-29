@@ -1,13 +1,9 @@
-/*
- * Copyright (C) Natalia Selyuto 2016 
- * Bauman Moscow State Technical University
- * IU3 
- */
+
 package ru.bmstu.equalizer.equalizer;
 
 /**
  *
- * @author Natalia Selyuto 
+ * RED
  */
 
 import java.util.concurrent.Callable;

@@ -1,8 +1,4 @@
-/*
- * Copyright (C) Natalia Selyuto 2016 
- * Bauman Moscow State Technical University
- * IU3 
- */
+
 package ru.bmstu.equalizer.equalizer;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
@@ -11,14 +7,14 @@ import java.util.concurrent.Future;
 
 /**
  *
- * @author Natalia Selyuto 
+ * RED
  */
 public class Equalizer {
 	
 	private short[] inputSignal;
 	private short[]outputSignal;
 	private Filter[] filters;
-	private final static int COUNT_OF_BANDS= 6;
+	private final static int COUNT_OF_BANDS= 8;
 	private final static char COUNT_OF_THREADS = 1;
 	private final int lenghtOfInputSignal;
 	ExecutorService pool;
@@ -45,6 +41,10 @@ public class Equalizer {
 				FilterInfo.COUNT_OF_COEFS, this.inputSignal);
 		this.filters[5].settings(FilterInfo.COEFS_OF_BAND_5, 
 				FilterInfo.COUNT_OF_COEFS, this.inputSignal);
+		this.filters[6].settings(FilterInfo.COEFS_OF_BAND_6,
+				FilterInfo.COUNT_OF_COEFS, this.inputSignal);
+		this.filters[7].settings(FilterInfo.COEFS_OF_BAND_7,
+				FilterInfo.COUNT_OF_COEFS, this.inputSignal);
 	}
 	
 	
@@ -56,6 +56,8 @@ public class Equalizer {
 		this.filters[3] = new Filter(this.lenghtOfInputSignal);
 		this.filters[4] = new Filter(this.lenghtOfInputSignal);
 		this.filters[5] = new Filter(this.lenghtOfInputSignal);
+		this.filters[6] = new Filter(this.lenghtOfInputSignal);
+		this.filters[7] = new Filter(this.lenghtOfInputSignal);
 		
 	}
 	
@@ -69,9 +71,11 @@ public class Equalizer {
 			this.outputSignal[i] += fs[0].get()[i] +
 						fs[1].get()[i] +
 						fs[2].get()[i] +
-                                                fs[3].get()[i] +
-                                                fs[4].get()[i] +
-						fs[5].get()[i];		
+					    fs[3].get()[i] +
+					    fs[4].get()[i] +
+						fs[5].get()[i] +
+						fs[6].get()[i] +
+						fs[7].get()[i];
 		}
 	}
 	

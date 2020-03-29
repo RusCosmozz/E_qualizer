@@ -1,14 +1,11 @@
-/*
- * Copyright (C) Natalia Selyuto 2016 
- * Bauman Moscow State Technical University
- * IU3 
- */
+
 package ru.bmstu.equalizer.effects;
 
 /**
  *
- * @author Natalia Selyuto
+ * RED
  */
+
 public class Delay extends Effect{
 	
 	public Delay() {
