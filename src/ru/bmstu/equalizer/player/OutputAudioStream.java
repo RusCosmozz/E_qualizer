@@ -7,9 +7,6 @@ import java.util.ArrayList;
 import javax.sound.sampled.AudioFormat;
 import javax.sound.sampled.AudioInputStream;
 
-/**
- * RED
- */
 public class OutputAudioStream {
     private final ArrayList<Byte> inputStream;
     private AudioInputStream outputAudioStream;

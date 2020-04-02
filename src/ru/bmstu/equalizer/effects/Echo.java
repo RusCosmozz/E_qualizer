@@ -1,14 +1,10 @@
 
 package ru.bmstu.equalizer.effects;
 
-/**
- *
- * RED
- */
 
-public class Delay extends Effect{
+public class Echo extends Effect{
 	
-	public Delay() {
+	public Echo() {
 		super(); 
 	}
 	

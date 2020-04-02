@@ -6,7 +6,7 @@ import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.util.concurrent.ExecutionException;
 
-import ru.bmstu.equalizer.effects.Delay;
+import ru.bmstu.equalizer.effects.Echo;
 import ru.bmstu.equalizer.effects.Distortion;
 import ru.bmstu.equalizer.equalizer.Equalizer;
 
@@ -19,9 +19,6 @@ import javax.sound.sampled.SourceDataLine;
 import javax.sound.sampled.UnsupportedAudioFileException;
 
 
-/**
- * RED
- */
 public class AudioPlayer implements LineListener {
     private double volume;
     private final SourceDataLine sourceDataLine;
@@ -36,7 +33,7 @@ public class AudioPlayer implements LineListener {
     private final FFT fourierInput;
     public FFT fourierOutput;
 
-    private final Delay delay;
+    private final Echo echo;
     private boolean isDelay;
 
     private final Distortion distortion;
@@ -55,7 +52,7 @@ public class AudioPlayer implements LineListener {
         this.ais = readFile.getAudioInputStream();
         this.buff = new byte[this.BUFF_SIZE];
         this.sampleBuff = new short[BUFF_SIZE / 2];
-        this.delay = new Delay();
+        this.echo = new Echo();
         this.distortion = new Distortion();
         this.isDelay = false;
         this.isDistortion = false;
@@ -114,15 +111,15 @@ public class AudioPlayer implements LineListener {
 
 
     private void delay(short[] inputSamples) {
-        this.delay.setInputSampleStream(inputSamples);
-        this.delay.createEffect();
+        this.echo.setInputSampleStream(inputSamples);
+        this.echo.createEffect();
     }
 
     public boolean delayIsActive() {
         return this.isDelay;
     }
 
-    public void setDelay(boolean b) {
+    public void setEcho(boolean b) {
         this.isDelay = b;
     }
 

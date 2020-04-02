@@ -22,11 +22,6 @@ import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.*;
 
 
-
-/**
- *
- * RED
- */
 public class FXMLDocumentController implements Initializable {
      
    
@@ -121,8 +116,8 @@ public class FXMLDocumentController implements Initializable {
     private void chorusBox() throws IOException, InterruptedException{
         System.out.println("Delay");
     	if(!this.audioPlayer.delayIsActive())
-    		this.audioPlayer.setDelay(true);
-    	else this.audioPlayer.setDelay(false);
+    		this.audioPlayer.setEcho(true);
+    	else this.audioPlayer.setEcho(false);
     }
     
     @FXML

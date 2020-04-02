@@ -12,10 +12,6 @@ import javax.sound.sampled.SourceDataLine;
 import javax.sound.sampled.UnsupportedAudioFileException;
 
 
-/**
- *RED
- */
-
 public class ReadMusicFile {
     private AudioInputStream ais;
     private byte[] outputSignal;

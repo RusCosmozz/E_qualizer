@@ -1,10 +1,7 @@
 
 package ru.bmstu.equalizer.player;
 
-/**
- *
- * RED
- */
+
 public class AudioFileFormat {
 	private final boolean bigEndian;
 	private final boolean signed;

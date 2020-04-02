@@ -4,10 +4,6 @@ package ru.bmstu.equalizer.player;
 import static java.lang.Math.*;
 
 
-/**
- *
- * RED
- */
 public class FFT {
     // AVal - массив анализируемых данных, Nvl - длина массива должна быть кратна степени 2.
 // FTvl - массив полученных значений, Nft - длина массива должна быть равна Nvl.

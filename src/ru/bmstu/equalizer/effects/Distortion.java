@@ -1,10 +1,7 @@
 
 package ru.bmstu.equalizer.effects;
 
-/**
- *
- * RED
- */
+
 public class Distortion extends Effect {
 
 	private short maxAmplitude;
